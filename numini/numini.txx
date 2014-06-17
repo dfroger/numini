@@ -69,12 +69,12 @@ NumIni::m_read_defined_scalar(T &value, std::string key)
 
 
 template <class T>
-std::vector<T>
-NumIni::get_vector(std::string key, std::vector<T> default_value)
+void
+NumIni::get_vector(std::vector<T> &value, std::string key,
+                   std::vector<T> default_value)
 {
-    std::vector<T> value = m_root[m_section][key].as< std::vector<T> >();
+    value = m_root[m_section][key].as< std::vector<T> > (default_value);
     m_allowed_keys_per_section.find(m_section)->second.insert(key);
-    return value;
 }
 
 
@@ -84,13 +84,12 @@ NumIni::get_vector(std::string key, std::vector<T> default_value)
 
 
 template <class TKEY, class TVAL>
-std::map<TKEY,TVAL>
-NumIni::get_map(std::string key, std::map<TKEY,TVAL> default_value)
+void
+NumIni::get_map(std::map<TKEY,TVAL> &value, std::string key,
+                std::map<TKEY,TVAL> default_value)
 {
-    std::map<TKEY,TVAL> value =
-        m_root[m_section][key].as< std::map<TKEY,TVAL> >();
+    value = m_root[m_section][key].as< std::map<TKEY,TVAL> >(default_value);
     m_allowed_keys_per_section.find(m_section)->second.insert(key);
-    return value;
 }
 
 #endif

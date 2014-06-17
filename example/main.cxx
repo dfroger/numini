@@ -8,9 +8,6 @@ using namespace std;
 
 int main()
 {
-    map<string,double> empty_string_double;
-    vector<int> empty_int;
-
     NumIni ini = NumIni("config.yaml");
 
     ini.move_to_section("rectangle");
@@ -21,8 +18,10 @@ int main()
     ini.readopt_scalar(position, "position", (string) "top");
 
     ini.move_to_section("line");
-    map<string,double> coords = ini.get_map("coords",empty_string_double);
-    vector<int> properties = ini.get_vector("properties",empty_int);
+    map<string,double> coords;
+    vector<int> properties;
+    ini.get_map(coords,"coords");
+    ini.get_vector(properties,"properties");
 
     ini.check_for_unknown_sections();
 
