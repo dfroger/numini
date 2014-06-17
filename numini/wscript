@@ -1,0 +1,9 @@
+def options(opt):
+        opt.load('compiler_cxx')
+
+def configure(conf):
+        conf.load('compiler_cxx')
+
+def build(bld):
+        bld.shlib(source='numini.cxx', target='numini')
+        bld.install_files('${PREFIX}/include', 'numini.hxx numini.txx')

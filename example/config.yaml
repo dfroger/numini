@@ -1,0 +1,8 @@
+rectangle:
+    position: bottom
+    width: 7
+    height: 12
+
+line:
+    coords: {"x0": 2, "x1": 1, "y0": 5, "y1": -3.5}
+    properties: [1,2,3]
