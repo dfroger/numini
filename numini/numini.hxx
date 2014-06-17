@@ -2,10 +2,12 @@
 #define NUMINI_HXX_INCLUDED
 
 #include <string.h>
+#include <sstream>
 #include <exception>
 #include <string>
 #include <map>
 #include <vector>
+#include <typeinfo>
 
 #include "yaml-cpp/yaml.h"
 
@@ -20,23 +22,35 @@ class NumIni {
 
     void check_for_wrong_sections();
 
+
+    // Scalars
     template <class T>
-    T
-    get_scalar(std::string key, T default_value);
+    void
+    readopt_scalar(T &value, std::string key, T default_value);
 
-    template <class TKEY, class TVAL>
-    std::map<TKEY,TVAL>
-    get_map(std::string key, std::map<TKEY,TVAL> default_value);
+    template <class T>
+    void
+    require_scalar(T &value, std::string key);
 
+    // Vectors
     template <class T>
     std::vector<T>
     get_vector(std::string key, std::vector<T> default_value);
+
+    // Maps
+    template <class TKEY, class TVAL>
+    std::map<TKEY,TVAL>
+    get_map(std::string key, std::map<TKEY,TVAL> default_value);
 
     private:
         YAML::Node m_root;
         std::string m_filename;
         std::string m_section;
         std::set<std::string> m_allowed_sections;
+
+        template <class T>
+        void
+        m_read_defined_scalar(T &value, std::string key);
 };
 
 class NumIniError: public std::exception

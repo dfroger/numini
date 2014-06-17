@@ -1,7 +1,7 @@
 rectangle:
+    width: 11
+    height: 10
     position: bottom
-    width: 7
-    height: 12
 
 line:
     coords: {"x0": 2, "x1": 1, "y0": 5, "y1": -3.5}

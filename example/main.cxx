@@ -14,9 +14,11 @@ int main()
     NumIni ini = NumIni("config.yaml");
 
     ini.move_to_section("rectangle");
-    string position = ini.get_scalar("position",(string) "top");
-    double width = ini.get_scalar("width",1.);
-    double height = ini.get_scalar("height",1.);
+    double width, height;
+    string position;
+    ini.require_scalar(width, "width");
+    ini.require_scalar(height, "height");
+    ini.readopt_scalar(position, "position", (string) "top");
 
     ini.move_to_section("line");
     map<string,double> coords = ini.get_map("coords",empty_string_double);

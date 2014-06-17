@@ -1,5 +1,3 @@
-#include <sstream>
-
 #include "numini.hxx"
 
 NumIni::NumIni(std::string filename):
