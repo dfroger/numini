@@ -36,14 +36,22 @@ class NumIni {
     // Vectors
     template <class T>
     void 
-    get_vector(std::vector<T> &value, std::string key,
-               std::vector<T> default_value = std::vector<T>());
+    readopt_vector(std::vector<T> &value, std::string key,
+                   std::vector<T> default_value = std::vector<T>());
+
+    template <class T>
+    void 
+    require_vector(std::vector<T> &value, std::string key);
 
     // Maps
     template <class TKEY, class TVAL>
     void
-    get_map(std::map<TKEY,TVAL> &value, std::string key,
-            std::map<TKEY,TVAL> default_value = std::map<TKEY,TVAL>());
+    readopt_map(std::map<TKEY,TVAL> &value, std::string key,
+                std::map<TKEY,TVAL> default_value = std::map<TKEY,TVAL>());
+
+    template <class TKEY, class TVAL>
+    void
+    require_map(std::map<TKEY,TVAL> &value, std::string key);
 
     private:
         YAML::Node m_root;

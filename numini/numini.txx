@@ -70,10 +70,29 @@ NumIni::m_read_defined_scalar(T &value, std::string key)
 
 template <class T>
 void
-NumIni::get_vector(std::vector<T> &value, std::string key,
+NumIni::readopt_vector(std::vector<T> &value, std::string key,
                    std::vector<T> default_value)
 {
     value = m_root[m_section][key].as< std::vector<T> > (default_value);
+    m_allowed_keys_per_section.find(m_section)->second.insert(key);
+}
+
+template <class T>
+void
+NumIni::require_vector(std::vector<T> &value, std::string key)
+{
+    YAML::Node node = m_root[m_section][key];
+    if (node.IsDefined() ) {
+        value = m_root[m_section][key].as< std::vector<T> > ();
+    } else {
+        std::ostringstream msg;
+        msg << "In file <" << m_filename << ">, "
+            << "section <" << m_section << ">, "
+            << "variable <" << key << "> "
+            << "is required."
+            << std::endl;
+        NUMINI_ERROR(msg.str().c_str());
+    }
     m_allowed_keys_per_section.find(m_section)->second.insert(key);
 }
 
@@ -85,10 +104,30 @@ NumIni::get_vector(std::vector<T> &value, std::string key,
 
 template <class TKEY, class TVAL>
 void
-NumIni::get_map(std::map<TKEY,TVAL> &value, std::string key,
+NumIni::readopt_map(std::map<TKEY,TVAL> &value, std::string key,
                 std::map<TKEY,TVAL> default_value)
 {
     value = m_root[m_section][key].as< std::map<TKEY,TVAL> >(default_value);
+    m_allowed_keys_per_section.find(m_section)->second.insert(key);
+}
+
+
+template <class TKEY, class TVAL>
+void
+NumIni::require_map(std::map<TKEY,TVAL> &value, std::string key)
+{
+    YAML::Node node = m_root[m_section][key];
+    if (node.IsDefined() ) {
+        value = m_root[m_section][key].as< std::map<TKEY,TVAL> > ();
+    } else {
+        std::ostringstream msg;
+        msg << "In file <" << m_filename << ">, "
+            << "section <" << m_section << ">, "
+            << "variable <" << key << "> "
+            << "is required."
+            << std::endl;
+        NUMINI_ERROR(msg.str().c_str());
+    }
     m_allowed_keys_per_section.find(m_section)->second.insert(key);
 }
 

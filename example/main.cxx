@@ -20,8 +20,8 @@ int main()
     ini.move_to_section("line");
     map<string,double> coords;
     vector<int> properties;
-    ini.get_map(coords,"coords");
-    ini.get_vector(properties,"properties");
+    ini.readopt_map(coords,"coords");
+    ini.require_vector(properties,"properties");
 
     ini.check_for_unknown_sections();
 
