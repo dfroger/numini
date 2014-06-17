@@ -24,11 +24,13 @@ int main()
     map<string,double> coords = ini.get_map("coords",empty_string_double);
     vector<int> properties = ini.get_vector("properties",empty_int);
 
-    ini.check_for_wrong_sections();
+    ini.check_for_unknown_sections();
 
     cout << "position: " << position << endl;
     cout << "width: " << width << endl;
     cout << "height: " << height << endl;
     cout << "coords: " << coords.size() << " " << coords.find("y1")->second << endl;
     cout << "properties: " << properties.size() << " " << properties[0] << endl;
+
+    ini.check_for_unknown_vars();
 }

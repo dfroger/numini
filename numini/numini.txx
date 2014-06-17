@@ -58,6 +58,8 @@ NumIni::m_read_defined_scalar(T &value, std::string key)
             << std::endl;
         NUMINI_ERROR(msg.str().c_str());
     }
+
+    m_allowed_keys_per_section.find(m_section)->second.insert(key);
 }
 
 
@@ -71,6 +73,7 @@ std::vector<T>
 NumIni::get_vector(std::string key, std::vector<T> default_value)
 {
     std::vector<T> value = m_root[m_section][key].as< std::vector<T> >();
+    m_allowed_keys_per_section.find(m_section)->second.insert(key);
     return value;
 }
 
@@ -86,6 +89,7 @@ NumIni::get_map(std::string key, std::map<TKEY,TVAL> default_value)
 {
     std::map<TKEY,TVAL> value =
         m_root[m_section][key].as< std::map<TKEY,TVAL> >();
+    m_allowed_keys_per_section.find(m_section)->second.insert(key);
     return value;
 }
 

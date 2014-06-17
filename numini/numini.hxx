@@ -20,8 +20,9 @@ class NumIni {
 
     void move_to_section(std::string section);
 
-    void check_for_wrong_sections();
+    void check_for_unknown_sections();
 
+    void check_for_unknown_vars();
 
     // Scalars
     template <class T>
@@ -47,6 +48,8 @@ class NumIni {
         std::string m_filename;
         std::string m_section;
         std::set<std::string> m_allowed_sections;
+        std::map<std::string,std::set<std::string> >
+            m_allowed_keys_per_section;
 
         template <class T>
         void
