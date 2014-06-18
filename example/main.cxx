@@ -34,6 +34,12 @@ class Vec3
     double m_x, m_y, m_z;
 };
 
+
+
+
+NumIni ini = NumIni("config.yaml");
+
+
 namespace YAML {
 
 template<>
@@ -42,9 +48,13 @@ struct convert<Vec3> {
         if (!node.IsSequence() || node.size() !=3) {
             return false;
         }
-        rhs.set_x( node[0].as<double>() );
-        rhs.set_y( node[1].as<double>() );
-        rhs.set_z( node[2].as<double>() );
+        double x,y,z;
+        ini.convert(x, node[0], "first component");
+        ini.convert(y, node[1], "second component");
+        ini.convert(z, node[2], "third component");
+        rhs.set_x(x);
+        rhs.set_y(y);
+        rhs.set_z(z);
         return true;
     }
 };
@@ -53,8 +63,6 @@ struct convert<Vec3> {
 
 int main()
 {
-    NumIni ini = NumIni("config.yaml");
-
     ini.move_to_section("rectangle");
     double width, height;
     string position;

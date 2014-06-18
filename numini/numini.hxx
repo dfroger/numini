@@ -53,10 +53,16 @@ class NumIni {
     void
     require_map(std::map<TKEY,TVAL> &value, std::string key);
 
+    template <class T>
+    void
+    convert(T &value, YAML::Node node, std::string description);
+
+
     private:
         YAML::Node m_root;
         std::string m_filename;
         std::string m_section;
+        std::string m_key;
         std::set<std::string> m_allowed_sections;
         std::map<std::string,std::set<std::string> >
             m_allowed_keys_per_section;
@@ -64,6 +70,14 @@ class NumIni {
         template <class T>
         void
         m_read_defined_scalar(T &value, std::string key);
+
+        template <class T>
+        void
+        m_read_defined_vector(std::vector<T> &value, std::string key);
+
+        template <class TKEY, class TVAL>
+        void
+        m_read_defined_map(std::map<TKEY,TVAL> &value, std::string key);
 };
 
 class NumIniError: public std::exception
