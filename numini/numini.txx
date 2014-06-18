@@ -20,6 +20,7 @@ NumIni::readopt_scalar(T &value, std::string key, T default_value)
     } else {
         value = default_value;
     }
+    m_allowed_keys_per_section.find(m_section)->second.insert(key);
 }
 
 template <class T>
@@ -39,6 +40,7 @@ NumIni::require_scalar(T &value, std::string key)
             << std::endl;
         NUMINI_ERROR(msg.str().c_str());
     }
+    m_allowed_keys_per_section.find(m_section)->second.insert(key);
 }
 
 template <class T>
@@ -58,7 +60,6 @@ NumIni::m_read_defined_scalar(T &value, std::string key)
             << std::endl;
         NUMINI_ERROR(msg.str().c_str());
     }
-    m_allowed_keys_per_section.find(m_section)->second.insert(key);
 }
 
 
@@ -79,6 +80,7 @@ NumIni::readopt_vector(std::vector<T> &value, std::string key,
     } else {
         value = default_value;
     }
+    m_allowed_keys_per_section.find(m_section)->second.insert(key);
 }
 
 template <class T>
@@ -127,7 +129,6 @@ NumIni::m_read_defined_vector(std::vector<T> &value, std::string key)
             << std::endl;
         NUMINI_ERROR(msg.str().c_str());
     }
-    m_allowed_keys_per_section.find(m_section)->second.insert(key);
 }
 
 
@@ -148,6 +149,7 @@ NumIni::readopt_map(std::map<TKEY,TVAL> &value, std::string key,
     } else {
         value = default_value;
     }
+    m_allowed_keys_per_section.find(m_section)->second.insert(key);
 }
 
 
@@ -199,7 +201,6 @@ NumIni::m_read_defined_map(std::map<TKEY,TVAL> &value, std::string key)
             << std::endl;
         NUMINI_ERROR(msg.str().c_str());
     }
-    m_allowed_keys_per_section.find(m_section)->second.insert(key);
 }
 
 
