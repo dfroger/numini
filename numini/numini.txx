@@ -145,7 +145,7 @@ NumIni::readopt_map(std::map<TKEY,TVAL> &value, std::string key,
     m_key = key;
     YAML::Node node = m_root[m_section][key];
     if ( node.IsDefined() ) {
-        value = m_root[m_section][key].as< std::map<TKEY,TVAL> >(default_value);
+        m_read_defined_map(value,key);
     } else {
         value = default_value;
     }
@@ -160,7 +160,7 @@ NumIni::require_map(std::map<TKEY,TVAL> &value, std::string key)
     m_key = key;
     YAML::Node node = m_root[m_section][key];
     if (node.IsDefined() ) {
-        m_read_defined_vector(value,key);
+        m_read_defined_map(value,key);
     } else {
         std::ostringstream msg;
         msg << "In file <" << m_filename << ">, "
