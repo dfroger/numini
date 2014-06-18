@@ -1,9 +1,22 @@
 #include "numini.hxx"
 
+NumIni::NumIni():
+    m_filename(""),
+    m_section("")
+{
+}
+
 NumIni::NumIni(std::string filename):
     m_filename(filename),
     m_section("")
 {
+    m_root = YAML::LoadFile(m_filename);
+}
+
+void
+NumIni::load_file(std::string filename)
+{
+    m_filename = filename;
     m_root = YAML::LoadFile(m_filename);
 }
 

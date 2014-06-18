@@ -16,7 +16,11 @@
 class NumIni {
     public:
         
+    NumIni();
     NumIni(std::string filename);
+
+    void
+    load_file(std::string filename);
 
     void move_to_section(std::string section);
 

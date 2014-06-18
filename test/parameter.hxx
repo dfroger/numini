@@ -6,7 +6,7 @@
 
 using namespace std;
 
-NumIni ini = NumIni("config.yaml");
+NumIni ini;
 
 class Vec3
 {
@@ -40,8 +40,9 @@ class Parameters
 {
     public:
 
-    void read_config_file()
+    void read_config_file(std::string filename)
     {
+        ini.load_file(filename);
         ini.move_to_section("rectangle");
         ini.require_scalar(m_width, "width");
         ini.require_scalar(m_height,"height");
