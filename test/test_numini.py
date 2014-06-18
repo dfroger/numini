@@ -7,7 +7,7 @@ class NumIniTest(unittest.TestCase):
     def test_normal(self):
 
         p = param.Parameters()
-        p.read_config_file("config.yaml")
+        p.read_config_file("config/normal.yaml")
 
         self.assertEqual(p.width(), 11.)
         self.assertEqual(p.height(), 10.)
@@ -23,10 +23,16 @@ class NumIniTest(unittest.TestCase):
     def test_unknown_section(self):
 
         p = param.Parameters()
-        msg = "In file <config_unknown_section.yaml>, unknown section: <foo>."
+        msg = "In file <config/unknown_section.yaml>, unknown section: <foo>."
         with self.assertRaisesRegexp(RuntimeError, msg):
-            p.read_config_file("config_unknown_section.yaml")
+            p.read_config_file("config/unknown_section.yaml")
 
+    def test_unknown_key(self):
+        p = param.Parameters()
+        msg = "In file <config/unknown_key.yaml>, " \
+              "section: <rectangle>, unknown key: <foo>."
+        with self.assertRaisesRegexp(RuntimeError, msg):
+            p.read_config_file("config/unknown_key.yaml")
 
 if __name__ == '__main__':
     unittest.main()
