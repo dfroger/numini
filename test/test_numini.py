@@ -20,6 +20,13 @@ class NumIniTest(unittest.TestCase):
         self.assertDictEqual(dict(p.coords()), expected_coords)
         self.assertEqual(list(p.properties()), [1,2,3])
 
+    def test_file_existance(self):
+
+        p = param.Parameters()
+        msg = " Can not open file <config/nosuch.yaml> for reading."
+        with self.assertRaisesRegexp(RuntimeError, msg):
+            p.read_config_file("config/nosuch.yaml")
+
     def test_unknown_section(self):
 
         p = param.Parameters()

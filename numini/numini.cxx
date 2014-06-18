@@ -1,5 +1,7 @@
 #include "numini.hxx"
 
+#include <fstream>
+
 NumIni::NumIni():
     m_filename(""),
     m_section("")
@@ -10,13 +12,25 @@ NumIni::NumIni(std::string filename):
     m_filename(filename),
     m_section("")
 {
-    m_root = YAML::LoadFile(m_filename);
+    load_file(filename);
 }
 
 void
 NumIni::load_file(std::string filename)
 {
     m_filename = filename;
+
+    // Check file.
+    std::ifstream f(filename.c_str());
+    bool is_good = f.good();
+    f.close();
+    if (!is_good) {
+        std::ostringstream msg;
+        msg << "Can not open file <" << m_filename << "> "
+            <<  "for reading." << std::endl;
+        NUMINI_ERROR(msg.str().c_str());
+    }
+
     m_root = YAML::LoadFile(m_filename);
 }
 
