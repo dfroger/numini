@@ -1,0 +1,19 @@
+package:
+  name: numini
+  version: 0.0.0
+
+source:
+  git_url: https://github.com/dfroger/numini
+
+build:
+  number: 1
+
+requirements:
+  build:
+    - yaml-cpp
+  run:
+    - yaml-cpp
+
+about:
+  home: https://github.com/dfroger/numini
+  license: GPL
