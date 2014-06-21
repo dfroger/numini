@@ -1,9 +1,21 @@
+from os.path import join,expanduser
+
 def options(opt):
-        opt.load('compiler_cxx')
+    opt.load('compiler_cxx')
+    opt.add_option('--yaml-cpp-dir', action='store', default='',
+        help='Must contain include/ and lib/')
 
 def configure(conf):
-        conf.load('compiler_cxx')
+    conf.load('compiler_cxx')
+    yaml_cpp_dir = expanduser(conf.options.yaml_cpp_dir)
+    yaml_cpp_inc = join(yaml_cpp_dir, 'include')
+    yaml_cpp_lib = join(yaml_cpp_dir, 'lib')
+    conf.env.prepend_value('INCLUDES', [yaml_cpp_inc])
+    conf.env.prepend_value('LIBPATH', [yaml_cpp_lib])
+    conf.env.prepend_value('RPATH', [yaml_cpp_lib])
+    conf.check(header_name='yaml-cpp/yaml.h', features='cxx cprogram')
+    conf.check_cxx(lib='yaml-cpp')
 
 def build(bld):
-        bld.shlib(source='numini.cxx', target='numini')
-        bld.install_files('${PREFIX}/include', 'numini.hxx numini.txx')
+    bld.shlib(source='numini.cxx', target='numini')
+    bld.install_files('${PREFIX}/include', 'numini.hxx numini.txx')
