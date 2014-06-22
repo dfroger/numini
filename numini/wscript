@@ -21,5 +21,5 @@ def configure(conf):
     conf.check_cxx(lib='yaml-cpp')
 
 def build(bld):
-    bld.shlib(source='numini.cxx', target='numini')
+    bld.shlib(source='numini.cxx', target='numini', lib='yaml-cpp')
     bld.install_files('${PREFIX}/include', 'numini.hxx numini.txx')
