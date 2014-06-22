@@ -51,7 +51,8 @@ class NumIni {
     template <class TKEY, class TVAL>
     void
     readopt_map(std::map<TKEY,TVAL> &value, std::string key,
-                std::map<TKEY,TVAL> default_value = std::map<TKEY,TVAL>());
+                std::map<TKEY,TVAL> default_value);
+//              std::map<TKEY,TVAL> default_value = std::map<TKEY,TVAL>());
 
     template <class TKEY, class TVAL>
     void
