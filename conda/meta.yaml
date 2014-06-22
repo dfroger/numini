@@ -11,8 +11,10 @@ build:
 
 requirements:
   build:
+    - boost
     - yaml-cpp
   run:
+    - boost
     - yaml-cpp
 
 about:
