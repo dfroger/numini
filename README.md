@@ -35,7 +35,7 @@ Configuration file
 ------------------------
 
 The configuration file is a [YAML](http://www.yaml.org/) file, restricted to
-section/variables as in [ini](http://en.wikipedia.org/wiki/INI_file) files.
+section/variables as in [INI](http://en.wikipedia.org/wiki/INI_file) files.
 
 For example, a **INI** file such as:
 
@@ -68,10 +68,10 @@ would be written with **numini** as :
 
 The supported types are:
 
-    - integer,
-    - float,
-    - string,
-    - boolean,
+    - integer
+    - float
+    - string
+    - boolean
     - custom type (C++ class)
 
 Variable value can be scalar of these types, or homogeneous vector or
@@ -85,6 +85,7 @@ Features
 - Custom types.
 - Optional Python interface.
 - Unit-tested (see `test/test_nimini.py`).
+- Raise error if configuration file does not provide a variable, or use default value.
 
 
 Example
