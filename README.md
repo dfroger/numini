@@ -11,22 +11,24 @@ Install
 
 It is recommanded to install numini using [conda](http://conda.pydata.org/)
 
-The package is located (here)[https://binstar.org/dfroger/numini]
+The package is located [here](https://binstar.org/dfroger/numini)
  
 ### From source ###
 
-Dependencies are (yaml-cpp)[http://code.google.com/p/yaml-cpp/], which itself
+Dependencies are [yaml-cpp](http://code.google.com/p/yaml-cpp/) which itself
 depends on [Boost](http://www.boost.org/).
 
 Download the latest release from https://github.com/dfroger/numini/releases
 
 Configure, build, and install:
+
     cd numini/numini
     ../waf configure
     ../waf build
     ../waf install
 
 Most usefull configure options are `--prefix`, `--yaml-cpp-dir` and `--boost-dir`.  See:
+
     ../waf configure --help
 
 Configuration file
@@ -65,6 +67,7 @@ would be written with **numini** as :
         properties: [1,2,3]
 
 The supported types are:
+
     - integer,
     - float,
     - string,
@@ -80,8 +83,8 @@ Features
 - INI files structure like.
 - Dectects wrong section names and wrong variable names.
 - Custom types.
-- Optional Python interface
-- Unit-tested (see `test/test_nimini.py`)
+- Optional Python interface.
+- Unit-tested (see `test/test_nimini.py`).
 
 
 Example
@@ -89,7 +92,7 @@ Example
 
 This example can be found in the `example` directory.
 
-Consider the following input file `config.yaml':
+Consider the following input file `config.yaml`:
 
     rectangle:
         width: 11
