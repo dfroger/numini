@@ -1,8 +1,24 @@
+from os.path import expanduser
+
 def options(opt):
         opt.load('compiler_cxx')
+        opt.add_option('--numini-inc-dir', action='store', default='',
+            help='Directory containing nimini library.')
+        opt.add_option('--numini-lib-dir', action='store', default='',
+            help='Directory containing nimini header.')
 
 def configure(conf):
         conf.load('compiler_cxx')
+        if conf.options.numini_inc_dir:
+            numini_inc_dir = expanduser(conf.options.numini_inc_dir)
+            conf.env.prepend_value('INCLUDES', numini_inc_dir)
+        if conf.options.numini_lib_dir:
+            numini_lib_dir = expanduser(conf.options.numini_lib_dir)
+            conf.env.prepend_value('LIBPATH', numini_lib_dir)
+            conf.env.prepend_value('RPATH', numini_lib_dir)
+        conf.check(header_name='numini.hxx', features='c cprogram')
+        conf.check_cc(lib='numini')
+        conf.check_cc(lib='yaml-cpp')
 
 def build(bld):
         bld.program(source='main.cxx', target='main', lib='numini yaml-cpp')
