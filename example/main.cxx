@@ -74,8 +74,9 @@ int main()
 
     ini.move_to_section("line");
     map<string,double> coords;
+    map<string,double> coords_default;
     vector<int> properties;
-    ini.readopt_map(coords,"coords");
+    ini.readopt_map(coords,"coords",coords_default);
     ini.require_vector(properties,"properties");
 
     ini.check_for_unknown_sections();
