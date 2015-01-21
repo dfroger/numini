@@ -6,8 +6,8 @@ source:
   git_url: https://github.com/dfroger/numini
 
 build:
-  number: 2
-  binary_relocation: false
+  number: 3
+  binary_relocation: true
 
 requirements:
   build:
