@@ -1,25 +1,29 @@
 from os.path import expanduser
+import os
+
+tooldir = '../waftool'
+os.environ['WAF_TOOLDIR'] = tooldir
 
 def options(opt):
-        opt.load('compiler_cxx')
-        opt.add_option('--numini-inc-dir', action='store', default='',
-            help='Directory containing nimini library.')
-        opt.add_option('--numini-lib-dir', action='store', default='',
-            help='Directory containing nimini header.')
+    opt.load('use_config')
+    opt.load('compiler_cxx')
+    opt.load('conda', tooldir=tooldir)
+    opt.load('numini', tooldir=tooldir)
 
 def configure(conf):
-        conf.load('compiler_cxx')
-        if conf.options.numini_inc_dir:
-            numini_inc_dir = expanduser(conf.options.numini_inc_dir)
-            conf.env.prepend_value('INCLUDES', numini_inc_dir)
-        if conf.options.numini_lib_dir:
-            numini_lib_dir = expanduser(conf.options.numini_lib_dir)
-            conf.env.prepend_value('LIBPATH', numini_lib_dir)
-            conf.env.prepend_value('RPATH', numini_lib_dir)
-        conf.check(header_name='numini.hxx', features='c cprogram')
-        conf.check_cc(lib='numini')
-        conf.check_cc(lib='yaml-cpp')
+    from waflib.extras import use_config
+    use_config.DEFAULT_DIR = 'config'
+    conf.load('use_config')
+
+    conf.load('compiler_cxx')
+    conf.load('conda', tooldir=tooldir)
+    conf.conda_boost()
+    conf.load('numini', tooldir=tooldir)
+    conf.check_numini()
 
 def build(bld):
-        bld.program(source='main.cxx', target='main', lib='numini yaml-cpp')
-
+    bld.program(
+        source = 'main.cxx',
+        target = 'main',
+        use = 'NUMINI YAML-CPP',
+    )
