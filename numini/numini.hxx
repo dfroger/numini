@@ -30,37 +30,37 @@ class NumIni {
 
     // Scalars
     template <class T>
-    void
-    readopt_scalar(T &value, std::string key, T default_value = T());
+    T
+    readopt_scalar(std::string key, T default_value = T());
 
     template <class T>
-    void
-    require_scalar(T &value, std::string key);
+    T
+    require_scalar(std::string key);
 
     // Vectors
     template <class T>
-    void 
-    readopt_vector(std::vector<T> &value, std::string key,
+    std::vector<T>
+    readopt_vector(std::string key,
                    std::vector<T> default_value = std::vector<T>());
 
     template <class T>
-    void 
-    require_vector(std::vector<T> &value, std::string key);
+    std::vector<T>
+    require_vector(std::string key);
 
     // Maps
     template <class TKEY, class TVAL>
-    void
-    readopt_map(std::map<TKEY,TVAL> &value, std::string key,
+    std::map<TKEY,TVAL>
+    readopt_map(std::string key,
                 std::map<TKEY,TVAL> default_value);
 //              std::map<TKEY,TVAL> default_value = std::map<TKEY,TVAL>());
 
     template <class TKEY, class TVAL>
-    void
-    require_map(std::map<TKEY,TVAL> &value, std::string key);
+    std::map<TKEY,TVAL>
+    require_map(std::string key);
 
     template <class T>
-    void
-    convert(T &value, YAML::Node node, std::string description);
+    T
+    convert(YAML::Node node, std::string description);
 
 
     private:

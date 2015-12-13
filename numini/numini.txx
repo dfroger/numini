@@ -10,9 +10,10 @@
 
 
 template <class T>
-void
-NumIni::readopt_scalar(T &value, std::string key, T default_value)
+T
+NumIni::readopt_scalar(std::string key, T default_value)
 {
+    T value;
     m_key = key;
     YAML::Node node = m_root[m_section][key];
     if ( node.IsDefined() ) {
@@ -21,12 +22,14 @@ NumIni::readopt_scalar(T &value, std::string key, T default_value)
         value = default_value;
     }
     m_allowed_keys_per_section.find(m_section)->second.insert(key);
+    return value;
 }
 
 template <class T>
-void
-NumIni::require_scalar(T &value, std::string key)
+T
+NumIni::require_scalar(std::string key)
 {
+    T value;
     m_key = key;
     YAML::Node node = m_root[m_section][key];
     if (node.IsDefined() ) {
@@ -41,6 +44,7 @@ NumIni::require_scalar(T &value, std::string key)
         NUMINI_ERROR(msg.str().c_str());
     }
     m_allowed_keys_per_section.find(m_section)->second.insert(key);
+    return value;
 }
 
 template <class T>
@@ -69,10 +73,10 @@ NumIni::m_read_defined_scalar(T &value, std::string key)
 
 
 template <class T>
-void
-NumIni::readopt_vector(std::vector<T> &value, std::string key,
-                   std::vector<T> default_value)
+std::vector<T>
+NumIni::readopt_vector(std::string key, std::vector<T> default_value)
 {
+    std::vector<T> value,
     m_key = key;
     YAML::Node node = m_root[m_section][key];
     if ( node.IsDefined() ) {
@@ -84,9 +88,10 @@ NumIni::readopt_vector(std::vector<T> &value, std::string key,
 }
 
 template <class T>
-void
-NumIni::require_vector(std::vector<T> &value, std::string key)
+std::vector<T>
+NumIni::require_vector(std::string key)
 {
+    std::vector<T> value;
     m_key = key;
     YAML::Node node = m_root[m_section][key];
     if (node.IsDefined() ) {
@@ -101,6 +106,7 @@ NumIni::require_vector(std::vector<T> &value, std::string key)
         NUMINI_ERROR(msg.str().c_str());
     }
     m_allowed_keys_per_section.find(m_section)->second.insert(key);
+    return value;
 }
 
 template <class T>
@@ -138,10 +144,11 @@ NumIni::m_read_defined_vector(std::vector<T> &value, std::string key)
 
 
 template <class TKEY, class TVAL>
-void
-NumIni::readopt_map(std::map<TKEY,TVAL> &value, std::string key,
-                std::map<TKEY,TVAL> default_value)
+std::map<TKEY,TVAL>
+NumIni::readopt_map(std::string key,
+                    std::map<TKEY,TVAL> default_value)
 {
+    std::map<TKEY,TVAL> value;
     m_key = key;
     YAML::Node node = m_root[m_section][key];
     if ( node.IsDefined() ) {
@@ -150,13 +157,15 @@ NumIni::readopt_map(std::map<TKEY,TVAL> &value, std::string key,
         value = default_value;
     }
     m_allowed_keys_per_section.find(m_section)->second.insert(key);
+    return value;
 }
 
 
 template <class TKEY, class TVAL>
-void
-NumIni::require_map(std::map<TKEY,TVAL> &value, std::string key)
+std::map<TKEY,TVAL>
+NumIni::require_map(std::string key)
 {
+    std::map<TKEY,TVAL> value;
     m_key = key;
     YAML::Node node = m_root[m_section][key];
     if (node.IsDefined() ) {
@@ -171,6 +180,7 @@ NumIni::require_map(std::map<TKEY,TVAL> &value, std::string key)
         NUMINI_ERROR(msg.str().c_str());
     }
     m_allowed_keys_per_section.find(m_section)->second.insert(key);
+    return value;
 }
 
 template <class TKEY, class TVAL>
@@ -210,11 +220,11 @@ NumIni::m_read_defined_map(std::map<TKEY,TVAL> &value, std::string key)
 
 
 template <class T>
-void
-NumIni::convert(T &value, YAML::Node node, std::string description)
+T
+NumIni::convert(YAML::Node node, std::string description)
 {
     try {
-        value = node.as<T>();
+        return node.as<T>();
     } catch (YAML::TypedBadConversion<T> &e) {
         std::ostringstream msg;
         msg << "In file <" << m_filename << ">, "

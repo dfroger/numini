@@ -35,51 +35,44 @@ class Vec3
 };
 
 
-
-
 NumIni ini = NumIni("config.yaml");
 
-
 namespace YAML {
-
-template<>
-struct convert<Vec3> {
-    static bool decode(const Node& node, Vec3& rhs) {
-        if (!node.IsSequence() || node.size() !=3) {
-            return false;
+    template<>
+    struct convert<Vec3> {
+        static bool decode(const Node& node, Vec3& rhs) {
+            if (!node.IsSequence() || node.size() !=3) {
+                return false;
+            }
+            rhs.set_x(ini.convert<double>(node[0], "first component"));
+            rhs.set_y(ini.convert<double>(node[1], "second component"));
+            rhs.set_z(ini.convert<double>(node[2], "third component"));
+            return true;
         }
-        double x,y,z;
-        ini.convert(x, node[0], "first component");
-        ini.convert(y, node[1], "second component");
-        ini.convert(z, node[2], "third component");
-        rhs.set_x(x);
-        rhs.set_y(y);
-        rhs.set_z(z);
-        return true;
-    }
-};
-
+    };
 }
 
 int main()
 {
+    // ========================================================================
     ini.move_to_section("rectangle");
-    double width, height;
-    string position;
-    Vec3 start;
-    ini.require_scalar(width, "width");
-    ini.require_scalar(height, "height");
-    ini.readopt_scalar(position, "position", (string) "top");
-    ini.require_scalar(start, "start");
 
+    double width = ini.require_scalar<double>("width");
+    double height = ini.require_scalar<double>("height");
+    string position = ini.readopt_scalar<string>("position", (string) "top");
+    Vec3 start = ini.require_scalar<Vec3>("start");
+
+    // ========================================================================
     ini.move_to_section("line");
-    map<string,double> coords;
-    map<string,double> coords_default;
-    vector<int> properties;
-    ini.readopt_map(coords,"coords",coords_default);
-    ini.require_vector(properties,"properties");
 
+    map<string,double> coords_default;
+    map<string,double> coords = ini.readopt_map<string,double>("coords",
+                                                               coords_default);
+    vector<int> properties = ini.require_vector<int>("properties");
+
+    // ========================================================================
     ini.check_for_unknown_sections();
+    ini.check_for_unknown_vars();
 
     cout << "position: " << position << endl;
     cout << "width: " << width << endl;
@@ -87,6 +80,4 @@ int main()
     cout << "coords: " << coords.size() << " " << coords.find("y1")->second << endl;
     cout << "properties: " << properties.size() << " " << properties[0] << endl;
     cout << "x, y, z: " << start.get_x() << " " << start.get_y() << " " << start.get_z() << endl;
-
-    ini.check_for_unknown_vars();
 }
