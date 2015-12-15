@@ -4,7 +4,7 @@ package:
 
 source:
   fn: numini-0.1.0.tar.gz
-  url: https://github.com/dfroger/numini/archive/v0.1.0.tar.gz
+  url: https://github.com/dfroger/numini/archive/0.1.0.tar.gz
 
 build:
   number: 0
@@ -14,9 +14,11 @@ requirements:
   build:
     - boost
     - yaml-cpp
+    - waf
   run:
     - boost
     - yaml-cpp
+    - waf
 
 about:
   home: https://github.com/dfroger/numini
