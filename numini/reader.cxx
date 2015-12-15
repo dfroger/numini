@@ -105,7 +105,7 @@ Node
 Reader::operator() (std::string key)
 {
     YAML::Node node = m_root[m_section][key];
-    return Node(m_filename, m_section, m_key); // node);
+    return Node(m_filename, m_section, m_key, node);
 }
 
 }

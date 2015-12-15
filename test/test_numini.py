@@ -9,7 +9,7 @@ class NumIniTest(unittest.TestCase):
         p = param.Parameters()
         p.read_config_file("config/normal.yaml")
 
-        self.assertEqual(p.width(), 4.4)
+        self.assertEqual(p.width(), 11.)
         
         #self.assertEqual(p.width(), 11.)
         #self.assertEqual(p.height(), 10.)
