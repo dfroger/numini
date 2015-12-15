@@ -1,0 +1,6 @@
+0.0.0
+  Initial version
+
+0.1.0 (2015/12/15)
+  Improve build system
+  API change: Return by value instead of in first arg
