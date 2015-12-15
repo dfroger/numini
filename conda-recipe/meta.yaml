@@ -7,8 +7,7 @@ source:
   url: https://github.com/dfroger/numini/archive/v0.1.0.tar.gz
 
 build:
-  number: 0 # [linux]
-  number: 1 # [osx]
+  number: 0
   binary_relocation: true
 
 requirements:
