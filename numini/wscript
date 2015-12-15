@@ -6,12 +6,14 @@ tooldir = '../waftool'
 def options(opt):
     opt.load('compiler_cxx')
     opt.load('conda', tooldir=tooldir)
+    opt.load('cflags', tooldir=tooldir)
     opt.load('yaml-cpp', tooldir=tooldir)
 
 def configure(conf):
     conf.load('compiler_cxx')
     conf.load('conda', tooldir=tooldir)
     conf.conda_boost()
+    conf.load('cflags', tooldir=tooldir)
     conf.load('yaml-cpp', tooldir=tooldir)
     conf.check_yaml_cpp()
 
@@ -19,7 +21,7 @@ def build(bld):
     bld.shlib(
         source = 'numini.cxx',
         target = 'numini', 
-        use = 'YAML_CPP BOOST'
+        use = 'YAML-CPP BOOST'
     )
 
     bld.install_files(

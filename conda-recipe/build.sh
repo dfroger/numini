@@ -1,12 +1,30 @@
 export MACOSX_DEPLOYMENT_TARGET=10.7
 
-export CC=clang
-export CXX=clang++
-export CFLAGS="-mmacosx-version-min=10.7"
-export CXXFLAGS="-stdlib=libc++ -mmacosx-version-min=10.7"
-export LDFLAGS="-stdlib=libc++ -mmacosx-version-min=10.7"
-
 cd numini
-waf configure --prefix=$PREFIX --conda
+
+if [ "$(uname)" == "Darwin" ]
+then export CC=clang
+    export CXX=clang++
+
+    unset CXXFLAGS
+    unset CFLAGS
+    unset LDFLAGS
+
+    waf configure \
+        --prefix=$PREFIX \
+        --conda \
+        --cflags='-mmacosx-version-min=10.7 -arch x86_64' \
+        --cxxflags='-stdlib=libc++ -mmacosx-version-min=10.7 -arch x86_64' \
+        --ldflags="-stdlib=libc++ -mmacosx-version-min=10.7 -arch x86_64"
+else
+    waf configure \
+        --prefix=$PREFIX \
+        --conda
+fi
+
 waf build
+
 waf install
+
+# waf (from the waf conda package), extract itself in $PREFIX/bin
+rm -rf $PREFIX/bin/.waf-*
