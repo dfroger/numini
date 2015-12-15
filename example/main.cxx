@@ -44,9 +44,9 @@ namespace YAML {
             if (!node.IsSequence() || node.size() !=3) {
                 return false;
             }
-            rhs.set_x(ini.convert<double>(node[0], "first component"));
-            rhs.set_y(ini.convert<double>(node[1], "second component"));
-            rhs.set_z(ini.convert<double>(node[2], "third component"));
+            rhs.set_x(ini(node, 0));
+            rhs.set_y(ini(node, 1));
+            rhs.set_z(ini(node, 2));
             return true;
         }
     };
@@ -57,18 +57,17 @@ int main()
     // ========================================================================
     ini.move_to_section("rectangle");
 
-    double width = ini.require_scalar<double>("width");
-    double height = ini.require_scalar<double>("height");
-    string position = ini.readopt_scalar<string>("position", (string) "top");
-    Vec3 start = ini.require_scalar<Vec3>("start");
+    double width = ini("width");
+    double height = ini("height");
+    string position = ini("position", "top");
+    Vec3 start = ini("start");
 
     // ========================================================================
     ini.move_to_section("line");
 
     map<string,double> coords_default;
-    map<string,double> coords = ini.readopt_map<string,double>("coords",
-                                                               coords_default);
-    vector<int> properties = ini.require_vector<int>("properties");
+    map<string,double> coords = ini("coords", coords_default);
+    vector<int> properties = ini("properties");
 
     // ========================================================================
     ini.check_for_unknown_sections();

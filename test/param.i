@@ -17,7 +17,7 @@ namespace std {
    try {
       $action
    }
-   catch (NumIniError &e) {
+   catch (numini::Error &e) {
       PyErr_SetString(PyExc_RuntimeError, const_cast<char*>(e.what()));
       return NULL;
    }

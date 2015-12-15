@@ -1,17 +1,20 @@
-#ifndef NUMINI_TXX_INCLUDED
-#define NUMINI_TXX_INCLUDED
+#ifndef NUMINI_READER_TXX_INCLUDED
+#define NUMINI_READER_TXX_INCLUDED
 
-#include "numini.hxx"
+#include "numini/reader.hxx"
 
+namespace numini
+{
 
 //////////////////////////////////////////////////////////////////////////////
 // Scalars
 //////////////////////////////////////////////////////////////////////////////
 
 
+/*
 template <class T>
 T
-NumIni::readopt_scalar(std::string key, T default_value)
+Reader::readopt_scalar(std::string key, T default_value)
 {
     T value;
     m_key = key;
@@ -27,7 +30,7 @@ NumIni::readopt_scalar(std::string key, T default_value)
 
 template <class T>
 T
-NumIni::require_scalar(std::string key)
+Reader::require_scalar(std::string key)
 {
     T value;
     m_key = key;
@@ -49,7 +52,7 @@ NumIni::require_scalar(std::string key)
 
 template <class T>
 void
-NumIni::m_read_defined_scalar(T &value, std::string key)
+Reader::m_read_defined_scalar(T &value, std::string key)
 {
     YAML::Node node = m_root[m_section][key];
     try {
@@ -74,7 +77,7 @@ NumIni::m_read_defined_scalar(T &value, std::string key)
 
 template <class T>
 std::vector<T>
-NumIni::readopt_vector(std::string key, std::vector<T> default_value)
+Reader::readopt_vector(std::string key, std::vector<T> default_value)
 {
     std::vector<T> value,
     m_key = key;
@@ -89,7 +92,7 @@ NumIni::readopt_vector(std::string key, std::vector<T> default_value)
 
 template <class T>
 std::vector<T>
-NumIni::require_vector(std::string key)
+Reader::require_vector(std::string key)
 {
     std::vector<T> value;
     m_key = key;
@@ -111,7 +114,7 @@ NumIni::require_vector(std::string key)
 
 template <class T>
 void
-NumIni::m_read_defined_vector(std::vector<T> &value, std::string key)
+Reader::m_read_defined_vector(std::vector<T> &value, std::string key)
 {
     YAML::Node node = m_root[m_section][key];
     std::ostringstream msg;
@@ -145,7 +148,7 @@ NumIni::m_read_defined_vector(std::vector<T> &value, std::string key)
 
 template <class TKEY, class TVAL>
 std::map<TKEY,TVAL>
-NumIni::readopt_map(std::string key,
+Reader::readopt_map(std::string key,
                     std::map<TKEY,TVAL> default_value)
 {
     std::map<TKEY,TVAL> value;
@@ -163,7 +166,7 @@ NumIni::readopt_map(std::string key,
 
 template <class TKEY, class TVAL>
 std::map<TKEY,TVAL>
-NumIni::require_map(std::string key)
+Reader::require_map(std::string key)
 {
     std::map<TKEY,TVAL> value;
     m_key = key;
@@ -185,7 +188,7 @@ NumIni::require_map(std::string key)
 
 template <class TKEY, class TVAL>
 void
-NumIni::m_read_defined_map(std::map<TKEY,TVAL> &value, std::string key)
+Reader::m_read_defined_map(std::map<TKEY,TVAL> &value, std::string key)
 {
     YAML::Node node = m_root[m_section][key];
     std::ostringstream msg;
@@ -221,7 +224,7 @@ NumIni::m_read_defined_map(std::map<TKEY,TVAL> &value, std::string key)
 
 template <class T>
 T
-NumIni::convert(YAML::Node node, std::string description)
+Reader::convert(YAML::Node node, std::string description)
 {
     try {
         return node.as<T>();
@@ -236,6 +239,9 @@ NumIni::convert(YAML::Node node, std::string description)
             << std::endl;
         NUMINI_ERROR(msg.str().c_str());
     }
+}
+*/
+
 }
 
 #endif

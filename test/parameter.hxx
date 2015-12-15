@@ -1,4 +1,5 @@
-#include "numini.hxx"
+#include "numini/reader.hxx"
+#include "numini/error.hxx"
 
 #include <string>
 #include <map>
@@ -6,8 +7,9 @@
 
 using namespace std;
 
-NumIni ini;
+numini::Reader ini;
 
+/*
 class Vec3
 {
     public:
@@ -35,6 +37,7 @@ class Vec3
     private:
     double m_x, m_y, m_z;
 };
+*/
 
 class Parameters
 {
@@ -44,6 +47,8 @@ class Parameters
     {
         ini.load_file(filename);
         ini.move_to_section("rectangle");
+        m_width = ini("width");
+        /*
         ini.require_scalar(m_width, "width");
         ini.require_scalar(m_height,"height");
         ini.readopt_scalar(m_position, "position", (string) "top");
@@ -55,14 +60,17 @@ class Parameters
 
         ini.check_for_unknown_sections();
         ini.check_for_unknown_vars();
+        */
     }
 
     std::string position(){return m_position;}
     double width(){return m_width;}
+    /*
     double height(){return m_height;}
     std::map<std::string,double> coords(){return m_coords;}
     std::vector<int> properties(){return m_properties;}
     Vec3 start(){return m_start;}
+    */
 
     private:
 
@@ -71,9 +79,10 @@ class Parameters
         double m_height;
         std::map<std::string,double> m_coords;
         std::vector<int> m_properties;
-        Vec3 m_start;
+        //Vec3 m_start;
 };
 
+/*
 namespace YAML
 {
 
@@ -95,4 +104,5 @@ struct convert<Vec3> {
 };
 
 }
+*/
 

@@ -1,14 +1,18 @@
-#include "numini.hxx"
+#include "numini/reader.hxx"
+#include "numini/error.hxx"
 
 #include <fstream>
 
-NumIni::NumIni():
+namespace numini
+{
+
+Reader::Reader():
     m_filename(""),
     m_section("")
 {
 }
 
-NumIni::NumIni(std::string filename):
+Reader::Reader(std::string filename):
     m_filename(filename),
     m_section("")
 {
@@ -16,7 +20,7 @@ NumIni::NumIni(std::string filename):
 }
 
 void
-NumIni::load_file(std::string filename)
+Reader::load_file(std::string filename)
 {
     m_filename = filename;
 
@@ -35,7 +39,7 @@ NumIni::load_file(std::string filename)
 }
 
 void
-NumIni::move_to_section(std::string section)
+Reader::move_to_section(std::string section)
 {
     m_section = section;
     m_allowed_sections.insert(section);
@@ -44,7 +48,7 @@ NumIni::move_to_section(std::string section)
 }
 
 void
-NumIni::check_for_unknown_sections()
+Reader::check_for_unknown_sections()
 {
     std::string section;
     bool is_in;
@@ -64,7 +68,7 @@ NumIni::check_for_unknown_sections()
 }
 
 void
-NumIni::check_for_unknown_vars()
+Reader::check_for_unknown_vars()
 {
     std::string section, key;
     YAML::Node node;
@@ -97,34 +101,11 @@ NumIni::check_for_unknown_vars()
     }
 }
 
-NumIniError::NumIniError():
-    str_(NULL)
+Node
+Reader::operator() (std::string key)
 {
+    YAML::Node node = m_root[m_section][key];
+    return Node(m_filename, m_section, m_key); // node);
 }
 
-NumIniError::NumIniError(const char * str,const char * file,int line):
-    str_(NULL)
-{
-  std::ostringstream msg;
-  msg << file << ":" << line << ": " << str ;
-  msg.flush();
-
-  str_ = new char[ strlen( msg.str().c_str() )+1 ];
-  strcpy(str_, msg.str().c_str() );
-}
-const char* NumIniError::what() const throw()
-{
-  return str_;
-}
-
-void numini_error(const char * str,const char * file,int line)
-{
-  NumIniError err(str,file,line);
-  throw err;
-}
-
-void numini_error(std::string str,const char * file,int line)
-{
-  NumIniError err(str.c_str(),file,line);
-  throw err;
 }

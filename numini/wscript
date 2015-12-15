@@ -19,12 +19,13 @@ def configure(conf):
 
 def build(bld):
     bld.shlib(
-        source = 'numini.cxx',
+        source = ['reader.cxx', 'error.cxx', 'node.cxx'],
         target = 'numini', 
+        includes = '.',
         use = 'YAML-CPP BOOST'
     )
 
     bld.install_files(
-        '${PREFIX}/include',
-        'numini.hxx numini.txx',
+        '${PREFIX}/include/numini',
+        ['reader.hxx', 'reader.txx', 'error.hxx', 'node.hxx'],
     )
