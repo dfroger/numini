@@ -108,4 +108,10 @@ Reader::operator() (std::string key)
     return Node(m_filename, m_section, m_key, node);
 }
 
+Node
+Reader::operator() (YAML::Node node)
+{
+    return Node(m_filename, m_section, m_key, node);
+}
+
 }

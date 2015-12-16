@@ -36,6 +36,9 @@ class Reader
         Node
         operator() (std::string key);
 
+        Node
+        operator() (YAML::Node node);
+        
         /*
         // Scalars
         template <class T>
@@ -81,6 +84,7 @@ class Reader
         std::map<std::string,std::set<std::string> >
             m_allowed_keys_per_section;
 
+        /*
         template <class T>
         void
         m_read_defined_scalar(T &value, std::string key);
@@ -92,6 +96,7 @@ class Reader
         template <class TKEY, class TVAL>
         void
         m_read_defined_map(std::map<TKEY,TVAL> &value, std::string key);
+        */
 };
 
 }

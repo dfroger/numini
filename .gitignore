@@ -5,6 +5,7 @@
 
 build/
 *.pyc
+*.o
 *.so
 *_wrap.*
 test/param.py

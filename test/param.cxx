@@ -8,36 +8,20 @@ using namespace std;
 
 numini::Reader ini;
 
-/*
-class Vec3
+Vec3::Vec3():
+    m_x(0.),
+    m_y(0.),
+    m_z(0.)
 {
-    public:
+}
 
-    Vec3():
-        m_x(0.),
-        m_y(0.),
-        m_z(0.)
-    {}
-
-    Vec3(double x, double y, double z):
-        m_x(x),
-        m_y(y),
-        m_z(z)
-    {}
+Vec3::Vec3(double x, double y, double z):
+    m_x(x),
+    m_y(y),
+    m_z(z)
+{
+}
     
-    double get_x() const { return m_x;}
-    double get_y() const { return m_y;}
-    double get_z() const { return m_z;}
-
-    void set_x(double x) {m_x = x;}
-    void set_y(double y) {m_y = y;}
-    void set_z(double z) {m_z = z;}
-
-    private:
-    double m_x, m_y, m_z;
-};
-*/
-
 void
 Parameters::read_config_file(std::string filename)
 {
@@ -45,8 +29,9 @@ Parameters::read_config_file(std::string filename)
     ini.move_to_section("rectangle");
     m_width = ini("width");
     m_height = ini("height");
-    //m_position = ("position", (string) "top");
-    //ini.require_scalar(m_start, "start");
+    //m_position = ini("position", (string) "top");
+    m_position = ini("position");
+    m_start = ini("start");
 
     ini.move_to_section("line");
     //ini.readopt_map(m_coords,"coords");
@@ -56,27 +41,24 @@ Parameters::read_config_file(std::string filename)
     //ini.check_for_unknown_vars();
 }
 
-/*
 namespace YAML
 {
 
+// How to convert a YAML node to a Vec3.
 template<>
-struct convert<Vec3> {
-    static bool decode(const Node& node, Vec3& rhs) {
+struct convert<Vec3>
+{
+    static bool decode(const Node& node, Vec3& rhs)
+    {
         if (!node.IsSequence() || node.size() !=3) {
             return false;
         }
-        double x,y,z;
-        ini.convert(x, node[0], "first component");
-        ini.convert(y, node[1], "second component");
-        ini.convert(z, node[2], "third component");
-        rhs.set_x(x);
-        rhs.set_y(y);
-        rhs.set_z(z);
+        rhs.set_x( ini(node[0]) );
+        rhs.set_y( ini(node[1]) );
+        rhs.set_z( ini(node[2]) );
         return true;
     }
 };
 
 }
-*/
 
