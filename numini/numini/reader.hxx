@@ -94,9 +94,8 @@ class Reader
         m_read_defined_map(std::map<TKEY,TVAL> &value, std::string key);
 };
 
+}
 
 #include "numini/reader.txx"
-
-}
 
 #endif

@@ -14,7 +14,8 @@ class Node
         Node(std::string filename, std::string section,
              std::string key, YAML::Node node);
 
-    operator double();
+    template <typename T>
+    operator T();
 
     private:
         std::string m_filename;
@@ -24,5 +25,7 @@ class Node
 };
 
 }
+
+#include "numini/node.txx"
 
 #endif

@@ -2,7 +2,7 @@ from distutils.core import setup, Extension
 
 param = Extension(
          '_param',
-         sources = ['param.i',],
+         sources = ['param.i', 'param.cxx'],
          swig_opts = ['-c++',],
          libraries = ['yaml-cpp', 'numini'],
          include_dirs = [

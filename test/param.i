@@ -1,7 +1,7 @@
 %module param
 
 %{
-#include "parameter.hxx"
+#include "param.hxx"
 %}
 
 %include "std_string.i"
@@ -27,5 +27,4 @@ namespace std {
    }
 }
 
-
-%include "parameter.hxx"
+%include "param.hxx"
