@@ -31,7 +31,7 @@ Parameters::read_config_file(std::string filename)
     set_start( ini("start") );
 
     ini.move_to_section("line");
-    //ini.readopt_map(m_coords,"coords");
+    set_coords( ini("coords") );
     set_properties( ini("properties") );
 
     //ini.check_for_unknown_sections();

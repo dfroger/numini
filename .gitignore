@@ -9,6 +9,7 @@ build/
 *.so
 *_wrap.*
 test/param.py
+test/main
 
 .waf*
 

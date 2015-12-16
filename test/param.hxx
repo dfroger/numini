@@ -8,6 +8,9 @@
 #include <map>
 #include <iostream>
 
+typedef std::vector<int> vi;
+typedef std::map<std::string,double> s2d;
+
 class Vec3
 {
     public:
@@ -37,8 +40,8 @@ class Parameters
         std::string position(){return m_position;}
         void set_position(std::string p){m_position = p;}
         
-        std::vector<int> properties(){return m_properties;}
-        void set_properties(const std::vector<int> & p){m_properties = p;}
+        vi properties(){return m_properties;}
+        void set_properties(const vi & p){m_properties = p;}
         
         double width(){return m_width;}
         void set_width(const double w){m_width = w;}
@@ -46,7 +49,8 @@ class Parameters
         double height(){return m_height;}
         void set_height(const double h){m_height = h;}
         
-        std::map<std::string,double> coords(){return m_coords;}
+        s2d coords(){return m_coords;}
+        void set_coords(const s2d & c){m_coords = c;}
 
         Vec3 start(){return m_start;}
         void set_start(const Vec3 & s){m_start = s;}
@@ -56,8 +60,8 @@ class Parameters
         std::string m_position;
         double m_width;
         double m_height;
-        std::map<std::string,double> m_coords;
-        std::vector<int> m_properties;
+        s2d m_coords;
+        vi m_properties;
         Vec3 m_start;
 };
 

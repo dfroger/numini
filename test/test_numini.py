@@ -16,8 +16,8 @@ class NumIniTest(unittest.TestCase):
         self.assertEqual(p.start().get_y(), 3)
         self.assertEqual(p.start().get_z(), 0)
 
-        #expected_coords = {"x0": 2, "x1": 1, "y0": 5, "y1": -3.5}
-        #self.assertDictEqual(dict(p.coords()), expected_coords)
+        expected_coords = {"x0": 2, "x1": 1, "y0": 5, "y1": -3.5}
+        self.assertDictEqual(dict(p.coords()), expected_coords)
         self.assertEqual(list(p.properties()), [1,2,3])
 
     def test_file_existance(self):
