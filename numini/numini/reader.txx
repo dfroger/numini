@@ -17,6 +17,7 @@ Reader::operator() (std::string key, const T& default_value)
     T value;
     YAML::Node node = m_root[m_section][key];
     if (node.IsDefined() ) {
+        // TODO: check conversion
         value = node.as<T>();
     } else {
         value = default_value;

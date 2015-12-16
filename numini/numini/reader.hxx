@@ -47,7 +47,6 @@ class Reader
         YAML::Node m_root;
         std::string m_filename;
         std::string m_section;
-        std::string m_key;
         std::set<std::string> m_allowed_sections;
         std::map<std::string,std::set<std::string> >
             m_allowed_keys_per_section;

@@ -41,45 +41,40 @@ class NumIniTest(unittest.TestCase):
         with self.assertRaisesRegexp(RuntimeError, msg):
             p.read_config_file("config/unknown_key.yaml")
 
-    #def test_wrong_scalar_type(self):
-        #p = param.Parameters()
-        #msg = "In file <config/wrong_scalar_type.yaml>, " \
-              #"section <rectangle>, failed to read <width>: " \
-              #"expected a type: d, but got value: <foo>."
-        #with self.assertRaisesRegexp(RuntimeError, msg):
-            #p.read_config_file("config/wrong_scalar_type.yaml")
+    def test_wrong_scalar_type(self):
+        p = param.Parameters()
+        msg = "In file <config/wrong_scalar_type.yaml>, " \
+              "section <rectangle>, failed to read <width>."
+        with self.assertRaisesRegexp(RuntimeError, msg):
+            p.read_config_file("config/wrong_scalar_type.yaml")
 
-    #def test_not_a_sequence(self):
-        #p = param.Parameters()
-        #msg = "In file <config/not_a_sequence.yaml>, " \
-              #"section <line>, failed to read <properties>: " \
-              #"expected a type: vector<i>, but got non sequence value: <0>."
-        #with self.assertRaisesRegexp(RuntimeError, msg):
-            #p.read_config_file("config/not_a_sequence.yaml")
+    def test_not_a_sequence(self):
+        p = param.Parameters()
+        msg = "In file <config/not_a_sequence.yaml>, " \
+              "section <line>, failed to read <properties>."
+        with self.assertRaisesRegexp(RuntimeError, msg):
+            p.read_config_file("config/not_a_sequence.yaml")
 
-    #def test_not_a_map(self):
-        #p = param.Parameters()
-        #msg = "In file <config/not_a_map.yaml>, section <line>, " \
-              #"failed to read <coords>: expected a type: " \
-              #"map<Ss,d>, but got non map value: <1.>."
-        #with self.assertRaisesRegexp(RuntimeError, msg):
-            #p.read_config_file("config/not_a_map.yaml")
+    def test_not_a_map(self):
+        p = param.Parameters()
+        msg = "In file <config/not_a_map.yaml>, section <line>, " \
+              "failed to read <coords>."
+        with self.assertRaisesRegexp(RuntimeError, msg):
+            p.read_config_file("config/not_a_map.yaml")
 
-    #def test_wrong_element_type_in_sequence(self):
-        #p = param.Parameters()
-        #msg = "In file <config/wrong_element_type_in_sequence.yaml>, " \
-              #"section <line>, failed to read on element of <properties>: " \
-              #"expected a type: vector<i>, but got value: <- foo>."
-        #with self.assertRaisesRegexp(RuntimeError, msg):
-            #p.read_config_file("config/wrong_element_type_in_sequence.yaml")
+    def test_wrong_element_type_in_sequence(self):
+        p = param.Parameters()
+        msg = "In file <config/wrong_element_type_in_sequence.yaml>, " \
+              "section <line>, failed to read <properties>."
+        with self.assertRaisesRegexp(RuntimeError, msg):
+            p.read_config_file("config/wrong_element_type_in_sequence.yaml")
 
-    #def test_wrong_element_type_in_map(self):
-        #p = param.Parameters()
-        #msg = "In file <config/wrong_element_type_in_map.yaml>, " \
-              #"section <line>, failed to read on element of <coords>: " \
-              #"expected a type: map<d>, but got value: <!<!> x0: foo>."
-        #with self.assertRaisesRegexp(RuntimeError, msg):
-            #p.read_config_file("config/wrong_element_type_in_map.yaml")
+    def test_wrong_element_type_in_map(self):
+        p = param.Parameters()
+        msg = "In file <config/wrong_element_type_in_map.yaml>, " \
+              "section <line>, failed to read <coords>."
+        with self.assertRaisesRegexp(RuntimeError, msg):
+            p.read_config_file("config/wrong_element_type_in_map.yaml")
 
 if __name__ == '__main__':
     unittest.main()
