@@ -10,9 +10,7 @@ class NumIniTest(unittest.TestCase):
         p.read_config_file("config/normal.yaml")
 
         self.assertEqual(p.width(), 11.)
-        
-        #self.assertEqual(p.width(), 11.)
-        #self.assertEqual(p.height(), 10.)
+        self.assertEqual(p.height(), 10.)
         #self.assertEqual(p.position(), "bottom")
         #self.assertEqual(p.start().get_x(), 1)
         #self.assertEqual(p.start().get_y(), 3)
@@ -20,7 +18,7 @@ class NumIniTest(unittest.TestCase):
 
         #expected_coords = {"x0": 2, "x1": 1, "y0": 5, "y1": -3.5}
         #self.assertDictEqual(dict(p.coords()), expected_coords)
-        #self.assertEqual(list(p.properties()), [1,2,3])
+        self.assertEqual(list(p.properties()), [1,2,3])
 
     def test_file_existance(self):
 

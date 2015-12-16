@@ -44,20 +44,16 @@ Parameters::read_config_file(std::string filename)
     ini.load_file(filename);
     ini.move_to_section("rectangle");
     m_width = ini("width");
-    cout << "read_config_file: " << m_width << endl;
-    /*
-    ini.require_scalar(m_width, "width");
-    ini.require_scalar(m_height,"height");
-    ini.readopt_scalar(m_position, "position", (string) "top");
-    ini.require_scalar(m_start, "start");
+    m_height = ini("height");
+    //m_position = ("position", (string) "top");
+    //ini.require_scalar(m_start, "start");
 
     ini.move_to_section("line");
-    ini.readopt_map(m_coords,"coords");
-    ini.require_vector(m_properties,"properties");
+    //ini.readopt_map(m_coords,"coords");
+    m_properties = ini("properties");
 
-    ini.check_for_unknown_sections();
-    ini.check_for_unknown_vars();
-    */
+    //ini.check_for_unknown_sections();
+    //ini.check_for_unknown_vars();
 }
 
 /*

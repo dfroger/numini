@@ -47,12 +47,10 @@ class Parameters
 
     std::string position(){return m_position;}
     double width(){return m_width;}
-    /*
     double height(){return m_height;}
-    std::map<std::string,double> coords(){return m_coords;}
+    //std::map<std::string,double> coords(){return m_coords;}
     std::vector<int> properties(){return m_properties;}
-    Vec3 start(){return m_start;}
-    */
+    //Vec3 start(){return m_start;}
 
     private:
 
