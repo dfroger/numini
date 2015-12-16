@@ -8,5 +8,5 @@ int main()
 {
     Parameters p;
     p.read_config_file("config/normal.yaml");
-    cout << p.width() << endl;
+    cout << p.position() << endl;
 }

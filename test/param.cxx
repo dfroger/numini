@@ -25,15 +25,14 @@ Parameters::read_config_file(std::string filename)
 {
     ini.load_file(filename);
     ini.move_to_section("rectangle");
-    m_width = ini("width");
-    m_height = ini("height");
-    //m_position = ini("position", (string) "top");
-    set_position( ini("position") );
-    m_start = ini("start");
+    set_width( ini("width") );
+    set_height( ini("height") );
+    set_position( ini("position", (string) "top") );
+    set_start( ini("start") );
 
     ini.move_to_section("line");
     //ini.readopt_map(m_coords,"coords");
-    m_properties = ini("properties");
+    set_properties( ini("properties") );
 
     //ini.check_for_unknown_sections();
     //ini.check_for_unknown_vars();
