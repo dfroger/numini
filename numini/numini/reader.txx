@@ -21,7 +21,7 @@ Reader::operator() (std::string key, const T& default_value)
     } else {
         value = default_value;
     }
-    //m_allowed_keys_per_section.find(m_section)->second.insert(key);
+    m_allowed_keys_per_section.find(m_section)->second.insert(key);
     return value;
 }
 }

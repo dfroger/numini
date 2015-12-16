@@ -105,6 +105,7 @@ Node
 Reader::operator() (std::string key)
 {
     YAML::Node node = m_root[m_section][key];
+    m_allowed_keys_per_section.find(m_section)->second.insert(key);
     return Node(m_filename, m_section, m_key, node);
 }
 

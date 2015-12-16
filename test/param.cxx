@@ -34,8 +34,8 @@ Parameters::read_config_file(std::string filename)
     set_coords( ini("coords") );
     set_properties( ini("properties") );
 
-    //ini.check_for_unknown_sections();
-    //ini.check_for_unknown_vars();
+    ini.check_for_unknown_sections();
+    ini.check_for_unknown_vars();
 }
 
 namespace YAML
