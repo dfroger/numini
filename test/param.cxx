@@ -2,8 +2,6 @@
 
 #include "numini/node.hxx"
 
-#include <iostream> //tmp
-
 using namespace std;
 
 numini::Reader ini;
@@ -30,7 +28,7 @@ Parameters::read_config_file(std::string filename)
     m_width = ini("width");
     m_height = ini("height");
     //m_position = ini("position", (string) "top");
-    m_position = ini("position");
+    set_position( ini("position") );
     m_start = ini("start");
 
     ini.move_to_section("line");
