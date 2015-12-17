@@ -40,6 +40,14 @@ class Parameters
         void
         read_config_file(std::string filename, int file_version=0);
 
+        void
+        read_config_file_default_const(std::string filename,
+                                       int file_version=0);
+
+        void
+        read_config_file_default_values(std::string filename,
+                                       int file_version=0);
+
         std::string position(){return m_position;}
         void set_position(std::string p){m_position = p;}
         

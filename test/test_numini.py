@@ -100,15 +100,5 @@ class NumIniTest(unittest.TestCase):
                       for k,v in p.mstart().iteritems()}
         self.assertEqual(mstart, expected_mstart)
 
-    def test_object_wrong_vector(self):
-        pass
-
-    def test_default_value(self):
-        pass
-        # pas definit: chosir la valeur par defaut
-        # definit: choisir la valeur du fichier
-        # definit: erreur de conversion
-        # obj: valeur par defaut?
-
 if __name__ == '__main__':
     unittest.main()
