@@ -46,7 +46,6 @@ def detect_conda(conf):
 
 @conf
 def conda_boost(conf):
-    print "boosting"
     from waflib.extras import boost
     boost.BOOST_INCLUDES.insert(0, conf.env.INCLUDES_CONDA_ENV)
 

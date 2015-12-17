@@ -117,5 +117,21 @@ class NumIniTest(unittest.TestCase):
                       for k,v in p.mstart().iteritems()}
         self.assertEqual(mstart, expected_mstart)
 
+    def test_default_value(self):
+
+        p = param.Parameters()
+        p.read_config_file("config/no_position.yaml")
+
+        self.assertEqual(p.width(), 11.)
+        self.assertEqual(p.height(), 10.)
+        self.assertEqual(p.position(), "top") # install of bottom in normal.yaml
+        self.assertEqual(p.start().get_x(), 1)
+        self.assertEqual(p.start().get_y(), 3)
+        self.assertEqual(p.start().get_z(), 0)
+
+        expected_coords = {"x0": 2, "x1": 1, "y0": 5, "y1": -3.5}
+        self.assertDictEqual(dict(p.coords()), expected_coords)
+        self.assertEqual(list(p.properties()), [1,2,3])
+
 if __name__ == '__main__':
     unittest.main()
