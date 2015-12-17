@@ -83,6 +83,13 @@ class NumIniTest(unittest.TestCase):
         with self.assertRaisesRegexp(RuntimeError, msg):
             p.read_config_file("config/wrong_element_type_in_object.yaml")
 
+    def test_vector_of_object(self):
+        p = param.Parameters()
+        p.read_config_file("config/vector_of_object.yaml", 1)
+        expected_vstart= [ [0,1,2], [10,11,12], [20,21,22], ]
+        vstart = [ [s.get_x(), s.get_y(), s.get_z()] for s in p.vstart()]
+        self.assertEqual(vstart, expected_vstart)
+
     def test_object_wrong_vector(self):
         pass
 

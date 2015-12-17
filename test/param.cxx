@@ -21,7 +21,7 @@ Vec3::Vec3(double x, double y, double z):
 }
     
 void
-Parameters::read_config_file(std::string filename)
+Parameters::read_config_file(std::string filename, int file_version)
 {
     ini.load_file(filename);
     ini.move_to_section("rectangle");
@@ -33,6 +33,11 @@ Parameters::read_config_file(std::string filename)
     ini.move_to_section("line");
     set_coords( ini("coords") );
     set_properties( ini("properties") );
+
+    if (file_version==1) {
+        ini.move_to_section("starting");
+        set_vstart( ini("vstart") );
+    }
 
     ini.check_for_unknown_sections();
     ini.check_for_unknown_vars();

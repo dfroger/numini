@@ -30,12 +30,15 @@ class Vec3
         double m_x, m_y, m_z;
 };
 
+typedef std::vector<Vec3> vVec3;
+typedef std::map<int,Vec3> i2Vec3;
+
 class Parameters
 {
     public:
 
         void
-        read_config_file(std::string filename);
+        read_config_file(std::string filename, int file_version=0);
 
         std::string position(){return m_position;}
         void set_position(std::string p){m_position = p;}
@@ -55,6 +58,12 @@ class Parameters
         Vec3 start(){return m_start;}
         void set_start(const Vec3 & s){m_start = s;}
 
+        vVec3 vstart(){return m_vstart;}
+        void set_vstart(const vVec3 & vs){m_vstart = vs;}
+
+        i2Vec3 mstart(){return m_mstart;}
+        void set_mstart(const i2Vec3 & ms){m_mstart = ms;}
+
     private:
 
         std::string m_position;
@@ -63,6 +72,8 @@ class Parameters
         s2d m_coords;
         vi m_properties;
         Vec3 m_start;
+        vVec3 m_vstart;
+        i2Vec3 m_mstart;
 };
 
 #endif

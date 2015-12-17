@@ -11,6 +11,8 @@
 namespace std {
     %template(vector_int) vector<int>;
     %template(map_string_double) map<string, double>;
+    %template(vector_Vec3) vector<Vec3>;
+    %template(map_int_Vec3) map<int,Vec3>;
 }
 
 %exception {
