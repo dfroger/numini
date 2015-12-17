@@ -104,16 +104,16 @@ Reader::check_for_unknown_vars()
 Node
 Reader::operator() (std::string key)
 {
+    m_key = key;
     YAML::Node node = m_root[m_section][key];
     m_allowed_keys_per_section.find(m_section)->second.insert(key);
     return Node(m_filename, m_section, key, node);
 }
 
 Node
-Reader::operator() (YAML::Node node)
+Reader::operator() (YAML::Node node, const char* current_node)
 {
-    std::string key = "undefined";
-    return Node(m_filename, m_section, "undefined", node);
+    return Node(m_filename, m_section, m_key, node, current_node);
 }
 
 }

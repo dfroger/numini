@@ -1,3 +1,5 @@
+default: main
+
 param.py: param.cxx param.hxx param.i
 	python setup.py build_ext --inplace
 

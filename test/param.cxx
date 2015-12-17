@@ -50,12 +50,11 @@ struct convert<Vec3>
         if (!node.IsSequence() || node.size() !=3) {
             return false;
         }
-        rhs.set_x( ini(node[0]) );
-        rhs.set_y( ini(node[1]) );
-        rhs.set_z( ini(node[2]) );
+        rhs.set_x( ini(node[0], "x") );
+        rhs.set_y( ini(node[1], "y") );
+        rhs.set_z( ini(node[2], "z") );
         return true;
     }
 };
 
 }
-

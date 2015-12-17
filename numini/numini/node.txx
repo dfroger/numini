@@ -15,12 +15,14 @@ Node::operator T()
     T value;
     try {
         value = m_node.as<T>();
-    } catch (...) {
+    } catch (YAML::BadConversion &e) {
         std::ostringstream msg;
         msg << "In file <" << m_filename << ">, "
             << "section <" << m_section << ">, "
-            << "failed to read <" << m_key << ">."
-            << std::endl;
+            << "failed to read <" << m_key << ">";
+        if (m_current_node)
+            msg << " (while processing: " << m_current_node << ")";
+        msg << ".";
         NUMINI_ERROR(msg.str().c_str());
     }
     return value;

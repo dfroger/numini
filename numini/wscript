@@ -22,7 +22,8 @@ def build(bld):
         source = ['reader.cxx', 'error.cxx', 'node.cxx'],
         target = 'numini', 
         includes = '.',
-        use = 'YAML-CPP BOOST'
+        use = 'YAML-CPP BOOST',
+        cxxflags = '-g',
     )
 
     bld.install_files(

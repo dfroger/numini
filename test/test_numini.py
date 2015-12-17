@@ -76,5 +76,25 @@ class NumIniTest(unittest.TestCase):
         with self.assertRaisesRegexp(RuntimeError, msg):
             p.read_config_file("config/wrong_element_type_in_map.yaml")
 
+    def test_object_wrong_scalar(self):
+        p = param.Parameters()
+        msg = "In file <config/wrong_element_type_in_object.yaml>, section " \
+              "<rectangle>, failed to read <start> \(while processing: y\)."
+        with self.assertRaisesRegexp(RuntimeError, msg):
+            p.read_config_file("config/wrong_element_type_in_object.yaml")
+
+    def test_object_wrong_vector(self):
+        pass
+
+    def test_object_wrong_vector(self):
+        pass
+
+    def test_default_value(self):
+        pass
+        # pas definit: chosir la valeur par defaut
+        # definit: choisir la valeur du fichier
+        # definit: erreur de conversion
+        # obj: valeur par defaut?
+
 if __name__ == '__main__':
     unittest.main()

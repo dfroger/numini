@@ -4,11 +4,15 @@
 
 using namespace std;
 
-int main()
+int main(int argc, char** argv)
 {
-    //string filename = "config/normal.yaml";
-    string filename = "config/wrong_element_type_in_sequence.yaml";
+    string filename = (argc > 1) ? argv[1] : "config/normal.yaml";
+        
     Parameters p;
-    p.read_config_file(filename);
-    cout << p.position() << endl;
+    try {
+        p.read_config_file(filename);
+    } catch (numini::Error& e) {
+        cerr << e.what() << endl;
+        return 1;
+    }
 }
