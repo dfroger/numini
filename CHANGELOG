@@ -4,3 +4,7 @@
 0.1.0 (2015/12/15)
   Improve build system
   API change: Return by value instead of in first arg
+
+0.2.0 (2015/12/17)
+  Use operator TYPE() to find return value type
+  Use methods .has("key") and .has_section("section") instead of default values.
