@@ -3,8 +3,9 @@ package:
   version: 0.2.0
 
 source:
-  fn: numini-0.2.0.tar.gz
-  url: https://github.com/dfroger/numini/archive/0.2.0.tar.gz
+  path: ..
+  # fn: numini-0.2.0.tar.gz
+  # url: https://github.com/dfroger/numini/archive/0.2.0.tar.gz
 
 build:
   number: 0 # [osx]

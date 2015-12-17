@@ -28,5 +28,11 @@ def build(bld):
 
     bld.install_files(
         '${PREFIX}/include/numini',
-        ['reader.hxx', 'reader.txx', 'error.hxx', 'node.hxx'],
+         [
+             'numini/error.hxx',
+             'numini/node.hxx',
+             'numini/node.txx',
+             'numini/reader.hxx',
+             'numini/reader.txx',
+         ],
     )
