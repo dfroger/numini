@@ -12,7 +12,7 @@ def options(opt):
 
 def configure(conf):
     from waflib.extras import use_config
-    use_config.DEFAULT_DIR = 'config'
+    use_config.DEFAULT_DIR = 'wafconfig'
     conf.load('use_config')
 
     conf.load('compiler_cxx')
@@ -23,7 +23,7 @@ def configure(conf):
 
 def build(bld):
     bld.program(
-        source = 'main.cxx',
+        source = 'main.cxx param.cxx',
         target = 'main',
         use = 'NUMINI YAML-CPP',
     )
