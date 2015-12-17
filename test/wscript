@@ -1,6 +1,8 @@
 from os.path import expanduser
 import os
 
+top = os.path.realpath('.')
+out = os.path.realpath('./build')
 tooldir = '../waftool'
 os.environ['WAF_TOOLDIR'] = tooldir
 
@@ -9,21 +11,52 @@ def options(opt):
     opt.load('compiler_cxx')
     opt.load('conda', tooldir=tooldir)
     opt.load('numini', tooldir=tooldir)
+    opt.load('python')
+    opt.load('swig')
+    opt.add_option('--python-bindings', action='store_true', default=False,
+            help='Generate Python bindings to run unit tests (default: False)')
+    opt.add_option('--install-python-path', action='store_true', default=False,
+        help='Install param.pth for development mode.')
 
 def configure(conf):
     from waflib.extras import use_config
     use_config.DEFAULT_DIR = 'wafconfig'
     conf.load('use_config')
-
     conf.load('compiler_cxx')
     conf.load('conda', tooldir=tooldir)
-    conf.conda_boost()
     conf.load('numini', tooldir=tooldir)
     conf.check_numini()
+
+    if conf.options.python_bindings:
+        conf.env.PYTHON_BINDINGS = True
+        conf.load('python')
+        conf.check_python_version((2,7,0))
+        conf.check_python_headers()
+        conf.load('swig')
+        if conf.check_swig_version() < (1,2,27):
+            conf.fatal('this swig version is too old')
+    else:
+        conf.env.PYTHON_BINDINGS = False
+
+    # Install param.pth file.
+    if conf.options.install_python_path:
+        param_pth = os.path.join(conf.env.PYTHONDIR_CONDA_ENV, "param.pth")
+        with open(param_pth,'w') as f:
+            f.write(out + '\n')
 
 def build(bld):
     bld.program(
         source = 'main.cxx param.cxx',
         target = 'main',
-        use = 'NUMINI YAML-CPP',
+        use = ['NUMINI', 'YAML-CPP'],
     )
+
+    if bld.env.PYTHON_BINDINGS:
+        bld(
+            features = 'cxx cxxshlib pyext',
+            source = 'param.i param.cxx',
+            target = '_param',
+            swig_flags = '-c++ -python',
+            includes = '.',
+            use = ['NUMINI', 'YAML-CPP'],
+        )

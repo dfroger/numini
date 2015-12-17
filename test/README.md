@@ -7,4 +7,3 @@ Configure and build:
 
 		waf configure --use-config=dev
 		waf build
-

@@ -10,3 +10,5 @@ def configure(conf):
     conf.options.conda = True
     conf.options.numini_includes = join(root, 'numini')
     conf.options.numini_libpath = join(root, 'numini', 'build')
+    conf.options.python_bindings = True
+    conf.options.install_python_path = True
