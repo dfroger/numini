@@ -8,7 +8,7 @@ source:
 
 build:
   number: 0 # [osx]
-  number: 1 # [linux]
+  number: 0 # [linux]
   binary_relocation: true
 
 requirements:
