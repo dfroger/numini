@@ -31,7 +31,7 @@ class Vec3
 };
 
 typedef std::vector<Vec3> vVec3;
-typedef std::map<int,Vec3> i2Vec3;
+typedef std::map<std::string,Vec3> s2Vec3;
 
 class Parameters
 {
@@ -61,8 +61,8 @@ class Parameters
         vVec3 vstart(){return m_vstart;}
         void set_vstart(const vVec3 & vs){m_vstart = vs;}
 
-        i2Vec3 mstart(){return m_mstart;}
-        void set_mstart(const i2Vec3 & ms){m_mstart = ms;}
+        s2Vec3 mstart(){return m_mstart;}
+        void set_mstart(const s2Vec3 & ms){m_mstart = ms;}
 
     private:
 
@@ -73,7 +73,7 @@ class Parameters
         vi m_properties;
         Vec3 m_start;
         vVec3 m_vstart;
-        i2Vec3 m_mstart;
+        s2Vec3 m_mstart;
 };
 
 #endif

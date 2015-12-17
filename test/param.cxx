@@ -39,6 +39,11 @@ Parameters::read_config_file(std::string filename, int file_version)
         set_vstart( ini("vstart") );
     }
 
+    if (file_version==2) {
+        ini.move_to_section("starting");
+        set_mstart( ini("mstart") );
+    }
+
     ini.check_for_unknown_sections();
     ini.check_for_unknown_vars();
 }

@@ -90,8 +90,15 @@ class NumIniTest(unittest.TestCase):
         vstart = [ [s.get_x(), s.get_y(), s.get_z()] for s in p.vstart()]
         self.assertEqual(vstart, expected_vstart)
 
-    def test_object_wrong_vector(self):
-        pass
+    def test_map_of_object(self):
+        p = param.Parameters()
+        p.read_config_file("config/map_of_object.yaml", 2)
+        expected_mstart= { "foo": [0,1,2], 
+                           "bar": [10,11,12], 
+                           "baz": [20,21,22], }
+        mstart = {k:[v.get_x(), v.get_y(), v.get_z()]
+                      for k,v in p.mstart().iteritems()}
+        self.assertEqual(mstart, expected_mstart)
 
     def test_object_wrong_vector(self):
         pass
