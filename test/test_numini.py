@@ -20,6 +20,23 @@ class NumIniTest(unittest.TestCase):
         self.assertDictEqual(dict(p.coords()), expected_coords)
         self.assertEqual(list(p.properties()), [1,2,3])
 
+    def test_missing_key(self):
+
+        p = param.Parameters()
+        msg = "In file <config/missing_key.yaml>, section: <rectangle>, " \
+              "missing key: <width>."
+
+        with self.assertRaisesRegexp(RuntimeError, msg):
+            p.read_config_file("config/missing_key.yaml")
+
+    def test_missing_section(self):
+
+        p = param.Parameters()
+        msg = "In file <config/missing_section.yaml>, missing section: <rectangle>."
+
+        with self.assertRaisesRegexp(RuntimeError, msg):
+            p.read_config_file("config/missing_section.yaml")
+
     def test_file_existance(self):
 
         p = param.Parameters()
@@ -85,14 +102,14 @@ class NumIniTest(unittest.TestCase):
 
     def test_vector_of_object(self):
         p = param.Parameters()
-        p.read_config_file("config/vector_of_object.yaml", 1)
+        p.read_config_file("config/vector_of_object.yaml")
         expected_vstart= [ [0,1,2], [10,11,12], [20,21,22], ]
         vstart = [ [s.get_x(), s.get_y(), s.get_z()] for s in p.vstart()]
         self.assertEqual(vstart, expected_vstart)
 
     def test_map_of_object(self):
         p = param.Parameters()
-        p.read_config_file("config/map_of_object.yaml", 2)
+        p.read_config_file("config/map_of_object.yaml")
         expected_mstart= { "foo": [0,1,2], 
                            "bar": [10,11,12], 
                            "baz": [20,21,22], }

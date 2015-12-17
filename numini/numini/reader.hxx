@@ -36,12 +36,14 @@ class Reader
         Node
         operator() (std::string key);
 
-        template<typename T>
-        T
-        operator() (std::string key, const T& default_value);
-
         Node
         operator() (YAML::Node node, const char* current_node);
+
+        bool
+        has(std::string key);
+
+        bool
+        has_section(std::string section);
         
     private:
         YAML::Node m_root;

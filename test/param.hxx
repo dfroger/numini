@@ -36,17 +36,10 @@ typedef std::map<std::string,Vec3> s2Vec3;
 class Parameters
 {
     public:
+        Parameters();
 
         void
-        read_config_file(std::string filename, int file_version=0);
-
-        void
-        read_config_file_default_const(std::string filename,
-                                       int file_version=0);
-
-        void
-        read_config_file_default_values(std::string filename,
-                                       int file_version=0);
+        read_config_file(std::string filename);
 
         std::string position(){return m_position;}
         void set_position(std::string p){m_position = p;}

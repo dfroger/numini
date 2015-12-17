@@ -41,6 +41,15 @@ Reader::load_file(std::string filename)
 void
 Reader::move_to_section(std::string section)
 {
+    YAML::Node node = m_root[section];
+    if (! node.IsDefined()) {
+        std::ostringstream msg;
+        msg << "In file <" << m_filename << ">, "
+            << "missing section: <" << section << ">."
+            << std::endl;
+        NUMINI_ERROR(msg.str().c_str());
+    }
+    
     m_section = section;
     m_allowed_sections.insert(section);
 
@@ -106,6 +115,14 @@ Reader::operator() (std::string key)
 {
     m_key = key;
     YAML::Node node = m_root[m_section][key];
+    if (! node.IsDefined()) {
+        std::ostringstream msg;
+        msg << "In file <" << m_filename << ">, "
+            << "section: <" << m_section << ">, "
+            << "missing key: <" << key << ">."
+            << std::endl;
+        NUMINI_ERROR(msg.str().c_str());
+    }
     m_allowed_keys_per_section.find(m_section)->second.insert(key);
     return Node(m_filename, m_section, key, node);
 }
@@ -114,6 +131,20 @@ Node
 Reader::operator() (YAML::Node node, const char* current_node)
 {
     return Node(m_filename, m_section, m_key, node, current_node);
+}
+
+bool
+Reader::has_section(std::string section)
+{
+    YAML::Node node = m_root[section];
+    return node.IsDefined();
+}
+
+bool
+Reader::has(std::string key)
+{
+    YAML::Node node = m_root[m_section][key];
+    return node.IsDefined();
 }
 
 }
